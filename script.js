@@ -1,13 +1,11 @@
 //You can edit ALL of the code here
+const rootElem = document.getElementById("root");
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
 
 function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
-  rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-
   episodeList.forEach((episode) => {
     let mainDiv = document.createElement("div");
     let episodeTitle = document.createElement("h3");
@@ -17,7 +15,7 @@ function makePageForEpisodes(episodeList) {
     episodeTitle.className = "title";
     episodeImage.className = "image";
     episodeSummary.className = "summary";
-    
+
     episode.season < 10 && episode.number < 10
       ? (episodeTitle.innerText = `${episode.name} - S0${episode.season} E0${episode.number}`)
       : (episodeTitle.innerText = `${episode.name} - S0${episode.season} E${episode.number}`);
@@ -28,6 +26,14 @@ function makePageForEpisodes(episodeList) {
     mainDiv.appendChild(episodeSummary);
     rootElem.appendChild(mainDiv);
   });
-}
 
+  footerInfo();
+}
+function footerInfo() {
+  let footer = document.createElement("footer");
+  let createP = document.createElement("p");
+  createP.innerText = "This information originally comes from the TV Maz";
+  footer.appendChild(createP);
+  rootElem.appendChild(footer);
+}
 window.onload = setup;

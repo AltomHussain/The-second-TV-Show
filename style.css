@@ -2,5 +2,7 @@
   color: red;
 }
 .main-div{
-  
+  max-width: 300px;
+  border: 4p+x red solid;
+ 
 }
