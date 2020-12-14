@@ -1,3 +1,41 @@
 #root {
-  color: red;
+  /* color: red; */
+}
+.episodes-container {
+  background-color: #a5ddd8;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 35px;
+  margin: 10px auto;
+}
+.main-div {
+  max-width: 300px;
+  background-color: #2da599;
+  border: 4px #05b9a7 solid;
+  margin: 10px auto;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.title {
+  background-color: #097068;
+  margin: 5px;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+   border-radius: 2px;
+}
+.episode-image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+.episode-image:hover{
+  width: 95%;
+}
+.episode-summary{
+  text-align: justify;
+  padding: 0px 15px 0px 15px;
+  font-size: 18px;
 }
