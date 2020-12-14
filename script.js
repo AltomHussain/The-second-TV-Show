@@ -1,5 +1,6 @@
 //You can edit ALL of the code here
 const rootElem = document.getElementById("root");
+let episodesContainer = document.createElement("div");
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
@@ -7,15 +8,16 @@ function setup() {
 
 function makePageForEpisodes(episodeList) {
   episodeList.forEach((episode) => {
+    
     let mainDiv = document.createElement("div");
     let episodeTitle = document.createElement("h3");
     let episodeImage = document.createElement("img");
     let episodeSummary = document.createElement("p");
     mainDiv.className = "main-div";
     episodeTitle.className = "title";
-    episodeImage.className = "image";
-    episodeSummary.className = "summary";
-
+    episodeImage.className = "episode-image";
+    episodeSummary.className = "episode-summary";
+    episodesContainer.className = "episodes-container";
     episode.season < 10 && episode.number < 10
       ? (episodeTitle.innerText = `${episode.name} - S0${episode.season} E0${episode.number}`)
       : (episodeTitle.innerText = `${episode.name} - S0${episode.season} E${episode.number}`);
@@ -24,7 +26,8 @@ function makePageForEpisodes(episodeList) {
     mainDiv.appendChild(episodeTitle);
     mainDiv.appendChild(episodeImage);
     mainDiv.appendChild(episodeSummary);
-    rootElem.appendChild(mainDiv);
+    episodesContainer.appendChild(mainDiv)
+    rootElem.appendChild(episodesContainer);
   });
 
   footerInfo();
