@@ -3,6 +3,7 @@ const rootElem = document.getElementById("root");
 let episodesContainer = document.createElement("div");
 let displayNumberOfEpisode = document.createElement("p");
 let searchBarContainer = document.createElement("div");
+let getTheMainDiv = []
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
@@ -14,6 +15,7 @@ function makePageForEpisodes(episodeList) {
   let searchBarInput = document.createElement("input");
   displayNumberOfEpisode.id = "display-filtered";
   searchBarInput.className = "search-bar-input";
+  //Caling select dropdown menu
   selectEpisode(episodeList);
 
   searchBarContainer.appendChild(searchBarInput);
@@ -42,7 +44,7 @@ function makePageForEpisodes(episodeList) {
     rootElem.appendChild(episodesContainer);
   });
   //Calling the Search bar function
-  let getTheMainDiv = Array.from(document.querySelectorAll(".main-div"));
+ getTheMainDiv = Array.from(document.querySelectorAll(".main-div"));
   searchBar(getTheMainDiv, searchBarInput, displayNumberOfEpisodes);
   //Calling disNumberOfFilteredEpisodes
 
@@ -83,7 +85,7 @@ function footerInfo() {
 function selectEpisode(episodeList) {
   let select = document.createElement("select");
   let defaultOption = document.createElement("option");
-  defaultOption.innerText = "select all";
+  defaultOption.textContent = "Select All";
   select.appendChild(defaultOption);
   episodeList.forEach((episode) => {
     let option = document.createElement("option");
@@ -94,5 +96,20 @@ function selectEpisode(episodeList) {
     select.appendChild(option);
     searchBarContainer.appendChild(select);
   });
+
+  //AddEventListner to the select dropdonw menu
+  select.addEventListener("change", (e)=>{
+    let selectValue = e.target.value;
+    console.log(selectValue);
+  getTheMainDiv.forEach(episode=>{
+    myEl = episode.firstElementChild.textContent;
+  if (myEl === selectValue || myEl === "Select All") {
+    episode.style.display = "block";
+  } else {
+    episode.style.display = "none";
+  }
+  })
+
+  })
 }
 window.onload = setup;
