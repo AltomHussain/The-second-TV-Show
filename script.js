@@ -15,7 +15,7 @@ function makePageForEpisodes(episodeList) {
   displayNumberOfEpisode.id = "display-filtered";
   searchBarInput.className = "search-bar-input";
   selectEpisode(episodeList);
-  
+
   searchBarContainer.appendChild(searchBarInput);
   header.appendChild(searchBarContainer);
   header.appendChild(displayNumberOfEpisode);
@@ -31,8 +31,8 @@ function makePageForEpisodes(episodeList) {
     episodeSummary.className = "episode-summary";
     episodesContainer.className = "episodes-container";
     episode.season < 10 && episode.number < 10
-    ? (episodeTitle.innerText = `${episode.name} - S0${episode.season} E0${episode.number}`)
-    : (episodeTitle.innerText = `${episode.name} - S0${episode.season} E${episode.number}`);
+      ? (episodeTitle.innerText = `${episode.name} - S0${episode.season} E0${episode.number}`)
+      : (episodeTitle.innerText = `${episode.name} - S0${episode.season} E${episode.number}`);
     episodeImage.src = `${episode.image.medium}`;
     episodeSummary.innerHTML = `${episode.summary}`;
     mainDiv.appendChild(episodeTitle);
@@ -45,7 +45,7 @@ function makePageForEpisodes(episodeList) {
   let getTheMainDiv = Array.from(document.querySelectorAll(".main-div"));
   searchBar(getTheMainDiv, searchBarInput, displayNumberOfEpisodes);
   //Calling disNumberOfFilteredEpisodes
-  
+
   displayNumberOfEpisodes(episodeList, episodeList);
   //Selection function
   footerInfo();
@@ -64,32 +64,35 @@ function searchBar(getTheMainDiv, searchBarInput, displayNumberOfEpisodes) {
     });
     let displayNum = getTheMainDiv.filter(
       (val) => val.style.display === "block"
-      );
-      displayNumberOfEpisodes(displayNum, getTheMainDiv);
-    });
-  }
-  
-  function displayNumberOfEpisodes(displayNum, getTheMainDiv) {
-    console.log(displayNumberOfEpisode);
-    return (displayNumberOfEpisode.innerText = `Display ${displayNum.length}/ ${getTheMainDiv.length} Episodes`);
-  }
-  function footerInfo() {
-    let footer = document.createElement("footer");
-    let createP = document.createElement("p");
-    createP.innerText = "This information originally comes from the TV Maz";
-    footer.appendChild(createP);
-    rootElem.appendChild(footer);
-  }
-  function selectEpisode(episodeList){
-    let select = document.createElement("select")
-    episodeList.forEach(episode =>{
-      let option = document.createElement("option")
-        episode.season < 10 && episode.number < 10
-          ? (option.innerText = `${episode.name} - S0${episode.season} E0${episode.number}`)
-          : (option.innerText = `${episode.name} - S0${episode.season} E${episode.number}`);
-      select.appendChild(option)
-      searchBarContainer.appendChild(select)
-      
-    })
-  }
-  window.onload = setup;
+    );
+    displayNumberOfEpisodes(displayNum, getTheMainDiv);
+  });
+}
+
+function displayNumberOfEpisodes(displayNum, getTheMainDiv) {
+  console.log(displayNumberOfEpisode);
+  return (displayNumberOfEpisode.innerText = `Display ${displayNum.length}/ ${getTheMainDiv.length} Episodes`);
+}
+function footerInfo() {
+  let footer = document.createElement("footer");
+  let createP = document.createElement("p");
+  createP.innerText = "This information originally comes from the TV Maz";
+  footer.appendChild(createP);
+  rootElem.appendChild(footer);
+}
+function selectEpisode(episodeList) {
+  let select = document.createElement("select");
+  let defaultOption = document.createElement("option");
+  defaultOption.innerText = "select all";
+  select.appendChild(defaultOption);
+  episodeList.forEach((episode) => {
+    let option = document.createElement("option");
+    //to refactor to small reusable function
+    episode.season < 10 && episode.number < 10
+      ? (option.innerText = `${episode.name} - S0${episode.season} E0${episode.number}`)
+      : (option.innerText = `${episode.name} - S0${episode.season} E${episode.number}`);
+    select.appendChild(option);
+    searchBarContainer.appendChild(select);
+  });
+}
+window.onload = setup;
