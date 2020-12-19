@@ -23,19 +23,44 @@
   font-size: 20px;
   text-align: center;
   color: white;
-   border-radius: 2px;
+  border-radius: 2px;
 }
-.episode-image{
+.episode-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
 }
-.episode-image:hover{
+.episode-image:hover {
   width: 95%;
 }
-.episode-summary{
+.episode-summary {
   text-align: justify;
   padding: 0px 15px 0px 15px;
   font-size: 18px;
+}
+.search-bar-div {
+  margin: 20px;
+  max-width: 500px;
+}
+.search-bar-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid rgb(31, 61, 50);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+header{
+  background-color: green;
+  display: flex;
+  flex-wrap: wrap;
+}
+#display-filtered{
+    margin: 40px 0;
+}
+@media only screen and (max-width: 500px){
+  #display-filtered{
+    margin: 5px 0px 12px 20px;
+}
 }

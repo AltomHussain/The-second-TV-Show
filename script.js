@@ -1,14 +1,25 @@
 //You can edit ALL of the code here
 const rootElem = document.getElementById("root");
 let episodesContainer = document.createElement("div");
+let displayNumberOfEpisode = document.createElement("p");
+
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
 
 function makePageForEpisodes(episodeList) {
+  let header = document.createElement("header");
+  let searchBarContainer = document.createElement("div");
+  searchBarContainer.className = "search-bar-div";
+  let searchBarInput = document.createElement("input");
+  displayNumberOfEpisode.id = "display-filtered";
+  searchBarInput.className = "search-bar-input";
+  searchBarContainer.appendChild(searchBarInput);
+  header.appendChild(searchBarContainer);
+  header.appendChild(displayNumberOfEpisode);
+  rootElem.appendChild(header);
   episodeList.forEach((episode) => {
-    
     let mainDiv = document.createElement("div");
     let episodeTitle = document.createElement("h3");
     let episodeImage = document.createElement("img");
@@ -26,11 +37,40 @@ function makePageForEpisodes(episodeList) {
     mainDiv.appendChild(episodeTitle);
     mainDiv.appendChild(episodeImage);
     mainDiv.appendChild(episodeSummary);
-    episodesContainer.appendChild(mainDiv)
+    episodesContainer.appendChild(mainDiv);
     rootElem.appendChild(episodesContainer);
   });
+  //Calling the Search bar function
+  let getTheMainDiv = Array.from(document.querySelectorAll(".main-div"));
+  searchBar(getTheMainDiv, searchBarInput, displayNumberOfEpisodes);
+  //Calling disNumberOfFilteredEpisodes
+
+  displayNumberOfEpisodes(episodeList, episodeList);
 
   footerInfo();
+}
+
+function searchBar(getTheMainDiv, searchBarInput, displayNumberOfEpisodes) {
+  searchBarInput.addEventListener("keyup", function (e) {
+    let searchTerm = e.target.value.toLowerCase();
+    getTheMainDiv.forEach((text) => {
+      let getTextFromDiv = text.innerText;
+      if (getTextFromDiv.toLowerCase().indexOf(searchTerm) !== -1) {
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
+    });
+    let displayNum = getTheMainDiv.filter(
+      (val) => val.style.display === "block"
+    );
+    displayNumberOfEpisodes(displayNum, getTheMainDiv);
+  });
+}
+
+function displayNumberOfEpisodes(displayNum, getTheMainDiv) {
+  console.log(displayNumberOfEpisode);
+  return (displayNumberOfEpisode.innerText = `Display ${displayNum.length}/ ${getTheMainDiv.length} Episodes`);
 }
 function footerInfo() {
   let footer = document.createElement("footer");
@@ -39,4 +79,5 @@ function footerInfo() {
   footer.appendChild(createP);
   rootElem.appendChild(footer);
 }
+
 window.onload = setup;
